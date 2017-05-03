@@ -443,8 +443,11 @@ chart.base = function() {
             }
             yscale.sets++;
             if (yscale.auto) {
-                yscale.ymax = d3.max([yscale.ymax, ymax(dataset)]);
-                yscale.ymin = d3.min([yscale.ymin, ymin(dataset)]);
+                var ymax_v = d3.max([yscale.ymax, ymax(dataset)]);
+                var ymin_v = d3.min([yscale.ymin, ymin(dataset)]);
+                var span_v = ymax_v - ymin_v;
+                yscale.ymax = ymax_v + span_v * 0.125;
+                yscale.ymin = ymin_v - span_v * 0.125;
             }
         });
         var ymargin = {'left': 35};
